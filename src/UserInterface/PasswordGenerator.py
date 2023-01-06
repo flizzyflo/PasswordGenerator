@@ -1,12 +1,11 @@
 import tkinter as tk
 import sys
 from PasswordGenerator.password_generator import generate_password
-from Settings.settings import FONT_SETTINGS
 
 global password_length
 password_length = 12
 
-class PasswordGenerator(tk.Frame):
+class PasswordGeneratorFrame(tk.Frame):
 
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
@@ -17,7 +16,7 @@ class PasswordGenerator(tk.Frame):
 
         self.copy_password_button = tk.Button(master=self, 
                                               text= "Copy password", 
-                                              command= lambda: self.copy_password())
+                                              command= lambda: self.update_gui_copy_password())
         self.copy_password_button.pack(fill= tk.X, expand= True)
 
         self.quit_button= tk.Button(master= self, 
@@ -32,6 +31,8 @@ class PasswordGenerator(tk.Frame):
 
 
     def present_password(self, password_length: int) -> None:
+
+        """Presents the password within the GUI to the user."""
 
         password = generate_password(password_length= password_length)
         self.password_widget.config(state= tk.NORMAL)
@@ -51,7 +52,11 @@ class PasswordGenerator(tk.Frame):
                                                 justify= "center")
 
 
-    def copy_password(self) -> None:
+    def update_gui_copy_password(self) -> None:
+
+        """Updates the gui to signalize the succesful copying of the password to the user. Copies the password to the
+        clipboard and one can use the OS-specific hotkey combination to paste the password anywhere."""
+
         password = self.password_widget.get().rstrip()
         self.clipboard_clear()
         self.clipboard_append(password)
@@ -70,4 +75,7 @@ class PasswordGenerator(tk.Frame):
                                                 bg= "green")
 
     def is_macos(self) -> bool:
+
+        """Checks whether the current operating system is a mac os system or anything else."""
+
         return sys.platform == "darwin"

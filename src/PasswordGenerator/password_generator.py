@@ -1,18 +1,29 @@
 from random import randint
 from Settings.settings import MIN_LENGTH, MAX_LENGTH, CHARACTER_LIST
-import string
 
 def generate_password(password_length: int) -> str:
     
-    """Generates a password consisting out of several elements from lower- and uppercase, digits and punctuation elements
-    @param: password_length: integer -> specifies the lenght of the password"""
-
-
-    if password_length < MIN_LENGTH:
-        return "password is to short to be considered secure"
+    """Generates a password consisting out of several elements 
+    from lower- and uppercase, digits and punctuation elements.
     
-    if password_length > MAX_LENGTH:
-        return "Password length is to big to create password with every letter occuring once"
+    #### Parameters
+    1. password_length: int
+        -- specifies the lenght of the password
+   
+    #### Returns
+    1. password: str
+        -- Password as a string with length of input argument as a string.
+
+    """
+
+    # not required since the gui itself checks for the MIN and MAX lenght. 
+    # Commented, usable if password generation is used without gui
+    
+    # if password_length < MIN_LENGTH:
+    #     return "password is to short to be considered secure"
+    
+    # if password_length > MAX_LENGTH:
+    #     return "Password length is to big to create password with every letter occuring once"
 
     gen_count: int = 0
     password: str  = ""
