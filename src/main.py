@@ -1,6 +1,6 @@
 
-from UserInterface.PasswordGenerator import PasswordGeneratorFrame
-from Settings.settings import TOOL_TITLE, MIN_LENGTH, MAX_LENGTH
+from user_interface.password_generator_user_interface import PasswordGeneratorFrame
+from settings.settings import TOOL_TITLE, MIN_LENGTH, MAX_LENGTH
 import tkinter as tk
 from tkinter import simpledialog
 
@@ -14,26 +14,30 @@ def change_pw_length(password_generator: PasswordGeneratorFrame) -> None:
 
     global password_length
     
-    new_password_length = simpledialog.askinteger("Password length", "Select password length: ", minvalue= MIN_LENGTH, maxvalue= MAX_LENGTH)
-    password_generator.generate_button.config(command= lambda: password_generator.present_password(password_length= new_password_length))
+    new_password_length = simpledialog.askinteger("Password length", "Select password length: ",
+                                                  minvalue=MIN_LENGTH,
+                                                  maxvalue=MAX_LENGTH)
+    password_generator.generate_button.config(command=lambda: password_generator.present_password(password_length=new_password_length))
 
 
 if __name__ == "__main__":
 
     root = tk.Tk()
-    generator_frame = PasswordGeneratorFrame(master= root)
+    generator_frame = PasswordGeneratorFrame(master=root, password_length=12)
     generator_frame.pack()
     root.title(TOOL_TITLE)
 
     # set up user menu
-    user_menu = tk.Menu(master= root)
-    root.config(menu= user_menu)
+    user_menu = tk.Menu(master=root)
+    root.config(menu=user_menu)
     file_menu = tk.Menu(user_menu)
 
     user_menu.add_cascade(label="File", menu= file_menu)
 
-    file_menu.add_command(label= "Change password length", command= lambda: change_pw_length(password_generator= generator_frame))
+    file_menu.add_command(label="Change password length",
+                          command=lambda: change_pw_length(password_generator= generator_frame))
     file_menu.add_separator()
-    file_menu.add_command(label= "Quit Application", command= lambda: quit())
+    file_menu.add_command(label="Quit Application",
+                          command=lambda: quit())
     
     root.mainloop()
