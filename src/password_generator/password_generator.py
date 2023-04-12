@@ -17,15 +17,6 @@ def generate_password(password_length: int) -> str:
 
     """
 
-    # not required since the gui itself checks for the MIN and MAX lenght. 
-    # Commented, usable if password generation is used without gui
-    
-    # if password_length < MIN_LENGTH:
-    #     return "password is too short to be considered secure"
-    
-    # if password_length > MAX_LENGTH:
-    #     return "Password length is too big to create password with every letter occurring once"
-
     gen_count: int = 0
     password: str = ""
     variety_counter: int = 0
